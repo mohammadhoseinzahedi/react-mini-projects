@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import { getFullName } from "@/projects/contacts/lib/helpers";
 import MoreDropDown from "@/projects/contacts/components/more-dropdown";
+import { BASE_URL } from "@/lib/constants";
 import type { Contact } from "@/projects/contacts/lib/types";
 
 const ContactItem = ({ contact }: { contact: Contact }) => {
@@ -11,7 +12,7 @@ const ContactItem = ({ contact }: { contact: Contact }) => {
   return (
     <div className="flex items-center gap-3 rounded-lg px-2 py-3 text-sm text-slate-800 hover:bg-gray-100">
       <div>#</div>
-      <img src="/user.png" alt="Avatar" width={40} height={40} />
+      <img src={`${BASE_URL}user.png`} alt="Avatar" width={40} height={40} />
       <div
         onClick={() => {
           navigate(`/contacts/${contact.uuid}`);

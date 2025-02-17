@@ -3,8 +3,8 @@ import { useContactContext } from "@/projects/contacts/context/contact-context";
 import { useNavigate } from "react-router";
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { fieldToLabel } from "@/projects/contacts/lib/helpers";
+import { BASE_URL } from "@/lib/constants";
 import type { Contact } from "@/projects/contacts/lib/types";
-import { Button } from "@/components/ui/button";
 
 const ContactForm = ({
   contact,
@@ -52,7 +52,7 @@ const ContactForm = ({
     } else {
       addContact(filteredData);
     }
-    if (setIsOpen) setIsOpen(false)
+    if (setIsOpen) setIsOpen(false);
     navigate(`/contacts/`);
   };
 
@@ -63,7 +63,7 @@ const ContactForm = ({
     >
       <img
         className="col-span-2 justify-self-end"
-        src="/user.png"
+        src={`${BASE_URL}user.png`}
         alt="Avatar"
         width={50}
         height={50}
@@ -89,8 +89,8 @@ const ContactForm = ({
 
       <img
         className="col-span-2 self-start justify-self-end"
-        src="/phone-504.svg"
-        alt="Avatar"
+        src={`${BASE_URL}phone-504.svg`}
+        alt="Phone Icon"
         width={20}
         height={20}
       />
@@ -120,7 +120,7 @@ const ContactForm = ({
                     phoneAppend({ type: "Mobile", number: "" });
                   }}
                 >
-                  <img src="/plus.svg" height={15} width={15} />
+                  <img src={`${BASE_URL}plus.svg`} height={15} width={15} />
                 </button>
               )}
             </div>
@@ -130,8 +130,8 @@ const ContactForm = ({
 
       <img
         className="col-span-2 self-start justify-self-end"
-        src="/email-svgrepo-com.svg"
-        alt="Avatar"
+        src={`${BASE_URL}email-svgrepo-com.svg`}
+        alt="Email Icon"
         width={24}
         height={30}
       />
@@ -150,7 +150,7 @@ const ContactForm = ({
                 type="email"
                 className="focus:outline-0"
                 {...register(`emails.${index}.address`)}
-                placeholder="Email"
+                placeholder="Email Address"
               />
               {index === 0 && (
                 <button
@@ -160,36 +160,13 @@ const ContactForm = ({
                     emailAppend({ type: "Home", address: "" });
                   }}
                 >
-                  <img src="/plus.svg" height={15} width={15} />
+                  <img src={`${BASE_URL}plus.svg`} height={15} width={15} />
                 </button>
               )}
             </div>
           </div>
         ))}
       </div>
-
-      <img
-        className="col-span-2 self-start justify-self-end"
-        src="/notes-minimalistic-svgrepo-com.svg"
-        alt="Avatar"
-        width={25}
-        height={25}
-      />
-      <div className="col-span-10 space-y-2">
-        <textarea
-          className="w-full border-b focus:outline-0"
-          {...register("notes")}
-          placeholder="Notes"
-        />
-      </div>
-
-      <Button
-        variant={"secondary"}
-        type="submit"
-        className="col-span-10 col-start-3 text-gray-800 hover:cursor-pointer"
-      >
-        {contact ? "Edit Contact" : "Add Contact"}
-      </Button>
     </form>
   );
 };

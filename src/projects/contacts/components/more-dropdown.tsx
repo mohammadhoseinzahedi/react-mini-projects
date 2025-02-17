@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { useContactContext } from "@/projects/contacts/context/contact-context";
+import { BASE_URL } from "@/lib/constants";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +16,7 @@ const MoreDropDown = ({ contactId }: { contactId: string }) => {
       <DropdownMenuTrigger>
         <img
           className="hover:cursor-pointer"
-          src="/three-dots-vertical.svg"
+          src={`${BASE_URL}three-dots-vertical.svg`}
           alt="More"
           width={20}
           height={20}

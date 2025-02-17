@@ -1,5 +1,7 @@
 import { Project } from "./types";
 
+export const BASE_URL = "/react-mini-projects/";
+
 export const PROJECTS: readonly Project[] = [
   {
     title: "Contacts",

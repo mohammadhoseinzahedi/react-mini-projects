@@ -2,6 +2,7 @@ import { useParams, useNavigate, Link } from "react-router";
 import { useContactContext } from "@/projects/contacts/context/contact-context";
 import { getFullName } from "@/projects/contacts/lib/helpers";
 import Container from "@/components/container";
+import { BASE_URL } from "@/lib/constants";
 import type { Phone, Email, Contact } from "@/projects/contacts/lib/types";
 
 const Header = ({ contact }: { contact: Contact }) => {
@@ -12,7 +13,7 @@ const Header = ({ contact }: { contact: Contact }) => {
       <Container className="flex flex-wrap items-center gap-4 py-3">
         <Link to="/contacts">
           <img
-            src="/white-arrow-svgrepo-com.svg"
+            src={`${BASE_URL}white-arrow-svgrepo-com.svg`}
             alt="Back"
             width={24}
             height={24}
@@ -22,7 +23,7 @@ const Header = ({ contact }: { contact: Contact }) => {
 
         <Link to={`/contacts/${contact.uuid}/edit`} className="ms-auto">
           <img
-            src="/edit-button-svgrepo-com.svg"
+            src={`${BASE_URL}edit-button-svgrepo-com.svg`}
             alt="Edit"
             width={20}
             height={20}
@@ -37,8 +38,8 @@ const Header = ({ contact }: { contact: Contact }) => {
           }}
         >
           <img
-            src="/delete-svgrepo-com.svg"
-            alt="Edit"
+            src={`${BASE_URL}delete-svgrepo-com.svg`}
+            alt="Delete"
             width={20}
             height={20}
           />
@@ -57,7 +58,7 @@ const PhoneItem = ({ phone }: { phone: Phone }) => {
       >
         <img
           className=""
-          src="/phone-504.svg"
+          src={`${BASE_URL}phone-504.svg`}
           alt="Phone Icon"
           width={20}
           height={20}
@@ -78,7 +79,12 @@ const EmailItem = ({ email }: { email: Email }) => {
         className="flex gap-4 py-2 hover:text-blue-800"
         href={`mailto:${email.address}`}
       >
-        <img src="/email-svgrepo-com.svg" alt="Email" width={24} height={30} />
+        <img
+          src={`${BASE_URL}email-svgrepo-com.svg`}
+          alt="Email"
+          width={24}
+          height={30}
+        />
         <div className="grow border-b pb-2">
           <div>{email.address}</div>
           <div className="text-gray-700">{email.type}</div>
@@ -93,7 +99,7 @@ const NotesItem = ({ notes }: { notes: string }) => {
   return (
     <div className="flex gap-4 py-2">
       <img
-        src="/notes-minimalistic-svgrepo-com.svg"
+        src={`${BASE_URL}notes-minimalistic-svgrepo-com.svg`}
         alt="Notes"
         width={24}
         height={30}
