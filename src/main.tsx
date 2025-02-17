@@ -8,11 +8,12 @@ import ContactsPage from "@/pages/contacts.page";
 import EditContactPage from "@/pages/edit-contact.page";
 import ContactPage from "@/pages/contact.page";
 import MemoryMatchGamePage from "@/pages/memory-match-game.page";
+import { BASE_URL } from "@/lib/constants";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ContactContextProvider>
-      <BrowserRouter basename="/react-mini-projects">
+      <BrowserRouter basename={BASE_URL}>
         <Routes>
           <Route index element={<HomePage />} />
           <Route path="contacts">
