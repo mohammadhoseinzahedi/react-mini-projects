@@ -2,8 +2,11 @@ import { Input } from "@/components/ui/input";
 import { useContactContext } from "@/projects/contacts/context/contact-context";
 import { useNavigate } from "react-router";
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
+import PhoneIcon from "@/assets/phone-504.svg";
+import EmailIcon from "@/assets/email-svgrepo-com.svg";
+import PlusIcon from "@/assets/plus.svg";
+import UserImage from "@/assets/user.png";
 import { fieldToLabel } from "@/projects/contacts/lib/helpers";
-import { BASE_URL } from "@/lib/constants";
 import type { Contact } from "@/projects/contacts/lib/types";
 import { Button } from "@/components/ui/button";
 
@@ -64,7 +67,7 @@ const ContactForm = ({
     >
       <img
         className="col-span-2 justify-self-end"
-        src={`${BASE_URL}user.png`}
+        src={UserImage}
         alt="Avatar"
         width={50}
         height={50}
@@ -90,7 +93,7 @@ const ContactForm = ({
 
       <img
         className="col-span-2 self-start justify-self-end"
-        src={`${BASE_URL}phone-504.svg`}
+        src={PhoneIcon}
         alt="Phone Icon"
         width={20}
         height={20}
@@ -121,7 +124,7 @@ const ContactForm = ({
                     phoneAppend({ type: "Mobile", number: "" });
                   }}
                 >
-                  <img src={`${BASE_URL}plus.svg`} height={15} width={15} />
+                  <img src={PhoneIcon} height={15} width={15} />
                 </button>
               )}
             </div>
@@ -131,7 +134,7 @@ const ContactForm = ({
 
       <img
         className="col-span-2 self-start justify-self-end"
-        src={`${BASE_URL}email-svgrepo-com.svg`}
+        src={EmailIcon}
         alt="Email Icon"
         width={24}
         height={30}
@@ -161,7 +164,7 @@ const ContactForm = ({
                     emailAppend({ type: "Home", address: "" });
                   }}
                 >
-                  <img src={`${BASE_URL}plus.svg`} height={15} width={15} />
+                  <img src={PlusIcon} height={15} width={15} />
                 </button>
               )}
             </div>

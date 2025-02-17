@@ -1,8 +1,13 @@
 import { useParams, useNavigate, Link } from "react-router";
 import { useContactContext } from "@/projects/contacts/context/contact-context";
+import BackIcon from "@/assets/white-arrow-svgrepo-com.svg";
+import EditIcon from "@/assets/edit-button-svgrepo-com.svg";
+import DeleteIcon from "@/assets/delete-svgrepo-com.svg";
+import PhoneIcon from "@/assets/phone-504.svg";
+import EmailIcon from "@/assets/email-svgrepo-com.svg";
+import NotesIcon from "@/assets/notes-minimalistic-svgrepo-com.svg";
 import { getFullName } from "@/projects/contacts/lib/helpers";
 import Container from "@/components/container";
-import { BASE_URL } from "@/lib/constants";
 import type { Phone, Email, Contact } from "@/projects/contacts/lib/types";
 
 const Header = ({ contact }: { contact: Contact }) => {
@@ -12,22 +17,12 @@ const Header = ({ contact }: { contact: Contact }) => {
     <header className="bg-indigo-900 text-white">
       <Container className="flex flex-wrap items-center gap-4 py-3">
         <Link to="/contacts">
-          <img
-            src={`${BASE_URL}white-arrow-svgrepo-com.svg`}
-            alt="Back"
-            width={24}
-            height={24}
-          />
+          <img src={BackIcon} alt="Back" width={24} height={24} />
         </Link>
         <h1>{getFullName(contact)}</h1>
 
         <Link to={`/contacts/${contact.uuid}/edit`} className="ms-auto">
-          <img
-            src={`${BASE_URL}edit-button-svgrepo-com.svg`}
-            alt="Edit"
-            width={20}
-            height={20}
-          />
+          <img src={EditIcon} alt="Edit" width={20} height={20} />
         </Link>
         <button
           className="hover:cursor-pointer"
@@ -37,12 +32,7 @@ const Header = ({ contact }: { contact: Contact }) => {
             navigate("/contacts");
           }}
         >
-          <img
-            src={`${BASE_URL}delete-svgrepo-com.svg`}
-            alt="Delete"
-            width={20}
-            height={20}
-          />
+          <img src={DeleteIcon} alt="Delete" width={20} height={20} />
         </button>
       </Container>
     </header>
@@ -58,7 +48,7 @@ const PhoneItem = ({ phone }: { phone: Phone }) => {
       >
         <img
           className=""
-          src={`${BASE_URL}phone-504.svg`}
+          src={PhoneIcon}
           alt="Phone Icon"
           width={20}
           height={20}
@@ -79,12 +69,7 @@ const EmailItem = ({ email }: { email: Email }) => {
         className="flex gap-4 py-2 hover:text-blue-800"
         href={`mailto:${email.address}`}
       >
-        <img
-          src={`${BASE_URL}email-svgrepo-com.svg`}
-          alt="Email"
-          width={24}
-          height={30}
-        />
+        <img src={EmailIcon} alt="Email" width={24} height={30} />
         <div className="grow border-b pb-2">
           <div>{email.address}</div>
           <div className="text-gray-700">{email.type}</div>
@@ -98,12 +83,7 @@ const NotesItem = ({ notes }: { notes: string }) => {
   if (!notes) return <></>;
   return (
     <div className="flex gap-4 py-2">
-      <img
-        src={`${BASE_URL}notes-minimalistic-svgrepo-com.svg`}
-        alt="Notes"
-        width={24}
-        height={30}
-      />
+      <img src={NotesIcon} alt="Notes" width={24} height={30} />
       <div className="grow border-b pb-2">
         <p>{notes}</p>
         <div className="text-gray-700">Notes</div>
