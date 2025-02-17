@@ -5,6 +5,7 @@ import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { fieldToLabel } from "@/projects/contacts/lib/helpers";
 import { BASE_URL } from "@/lib/constants";
 import type { Contact } from "@/projects/contacts/lib/types";
+import { Button } from "@/components/ui/button";
 
 const ContactForm = ({
   contact,
@@ -166,6 +167,10 @@ const ContactForm = ({
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="col-span-12">
+        <Button type="submit">Save Contact</Button>
       </div>
     </form>
   );
