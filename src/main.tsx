@@ -12,7 +12,7 @@ import MemoryMatchGamePage from "@/pages/memory-match-game.page";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ContactContextProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/react-mini-projects">
         <Routes>
           <Route index element={<HomePage />} />
           <Route path="contacts">
