@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { useContactContext } from "@/projects/contacts/context/contact-context";
-import ThreeDotsIcon from "@/assets/three-dots-vertical.svg"
+import { EllipsisVertical as MoreIcon } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,13 +14,7 @@ const MoreDropDown = ({ contactId }: { contactId: string }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <img
-          className="hover:cursor-pointer"
-          src={ThreeDotsIcon}
-          alt="More"
-          width={20}
-          height={20}
-        />
+       <MoreIcon className="hover:cursor-pointer"/>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem

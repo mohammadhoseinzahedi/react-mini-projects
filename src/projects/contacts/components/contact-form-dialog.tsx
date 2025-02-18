@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ContactForm from "@/projects/contacts/components/contact-form";
-import PlusIcon from "@/assets/plus.svg"
+import { Plus as PlusIcon } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -19,7 +19,7 @@ const ContactFormDialog = () => {
           type="button"
           className="mx-auto mb-2 flex flex-col items-center rounded-full border px-6 py-1 text-xs hover:cursor-pointer"
         >
-          <img src={PlusIcon} alt="Plus Icon" width={14} height={14} />
+          <PlusIcon />
           <div className="text-gray-800">New contact</div>
         </button>
       </DialogTrigger>

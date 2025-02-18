@@ -1,4 +1,4 @@
-import { PROJECTS } from "@/lib/constants";
+import { PROJECTS, TECH_COLORS } from "@/lib/constants";
 import Container from "@/components/container";
 import {
   Card,
@@ -14,7 +14,7 @@ import type { Project } from "@/lib/types";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
-    <Card className="hover:bg-gray-50 flex flex-col h-full">
+    <Card className="flex h-full flex-col hover:bg-gray-50">
       <CardHeader>
         <CardTitle>{project.title}</CardTitle>
         <CardDescription>{project.description}</CardDescription>
@@ -23,11 +23,21 @@ const ProjectCard = ({ project }: { project: Project }) => {
         <div className="space-y-1.5">
           <h3>Technologies and Libraries</h3>
           <div className="5 space-y-1.5 space-x-1.5">
-            {project.techs.map((tech, index) => (
-              <Badge key={index} variant={"outline"}>
-                {tech}
-              </Badge>
-            ))}
+            {project.techs.map((tech, index) => {
+              const { text, bg } = TECH_COLORS[tech] || {
+                text: "text-gray-700",
+                bg: "bg-gray-100",
+              };
+              return (
+                <Badge
+                  key={index}
+                  className={`${text} ${bg}`}
+                  variant={"outline"}
+                >
+                  {tech}
+                </Badge>
+              );
+            })}
           </div>
         </div>
       </CardContent>

@@ -2,9 +2,9 @@ import { Input } from "@/components/ui/input";
 import { useContactContext } from "@/projects/contacts/context/contact-context";
 import { useNavigate } from "react-router";
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
-import PhoneIcon from "@/assets/phone-504.svg";
-import EmailIcon from "@/assets/email-svgrepo-com.svg";
-import PlusIcon from "@/assets/plus.svg";
+import { Phone as PhoneIcon } from "lucide-react";
+import { Mail as MailIcon } from "lucide-react";
+import { Plus as PlusIcon } from 'lucide-react';
 import UserImage from "@/assets/user.png";
 import { fieldToLabel } from "@/projects/contacts/lib/helpers";
 import type { Contact } from "@/projects/contacts/lib/types";
@@ -91,13 +91,7 @@ const ContactForm = ({
         ))}
       </div>
 
-      <img
-        className="col-span-2 self-start justify-self-end"
-        src={PhoneIcon}
-        alt="Phone Icon"
-        width={20}
-        height={20}
-      />
+      <PhoneIcon className="col-span-2 self-start justify-self-end" />
       <div className="col-span-10">
         {phoneFields.map((field, index) => (
           <div
@@ -124,7 +118,7 @@ const ContactForm = ({
                     phoneAppend({ type: "Mobile", number: "" });
                   }}
                 >
-                  <img src={PhoneIcon} height={15} width={15} />
+                  <PlusIcon />
                 </button>
               )}
             </div>
@@ -132,13 +126,7 @@ const ContactForm = ({
         ))}
       </div>
 
-      <img
-        className="col-span-2 self-start justify-self-end"
-        src={EmailIcon}
-        alt="Email Icon"
-        width={24}
-        height={30}
-      />
+      <MailIcon className="col-span-2 self-start justify-self-end" />
       <div className="col-span-10">
         {emailFields.map((field, index) => (
           <div
@@ -164,7 +152,7 @@ const ContactForm = ({
                     emailAppend({ type: "Home", address: "" });
                   }}
                 >
-                  <img src={PlusIcon} height={15} width={15} />
+                  <PlusIcon />
                 </button>
               )}
             </div>
