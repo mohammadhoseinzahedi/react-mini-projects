@@ -1,14 +1,26 @@
 import { Input } from "@/components/ui/input";
 import { useContactContext } from "@/projects/contacts/context/contact-context";
 import { useNavigate } from "react-router";
-import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
+import {
+  useForm,
+  SubmitHandler,
+  useFieldArray,
+  Controller,
+} from "react-hook-form";
 import { Phone as PhoneIcon } from "lucide-react";
 import { Mail as MailIcon } from "lucide-react";
-import { Plus as PlusIcon } from 'lucide-react';
+import { Plus as PlusIcon } from "lucide-react";
 import UserImage from "@/assets/user.png";
 import { fieldToLabel } from "@/projects/contacts/lib/helpers";
 import type { Contact } from "@/projects/contacts/lib/types";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const ContactForm = ({
   contact,
@@ -19,22 +31,7 @@ const ContactForm = ({
 }) => {
   const navigate = useNavigate();
   const { register, handleSubmit, control } = useForm<Contact>({
-    defaultValues: {
-      name: {
-        namePrefix: contact?.name?.namePrefix || "",
-        firstName: contact?.name?.firstName || "",
-        middleName: contact?.name?.middleName || "",
-        lastName: contact?.name?.lastName || "",
-        nameSuffix: contact?.name?.nameSuffix || "",
-      },
-      phones: contact?.phones?.length
-        ? contact.phones
-        : [{ type: "Mobile", number: "" }],
-      emails: contact?.emails?.length
-        ? contact.emails
-        : [{ type: "Home", address: "" }],
-      notes: contact?.notes || "",
-    },
+    defaultValues: contact,
   });
   const { fields: phoneFields, append: phoneAppend } = useFieldArray({
     control,
@@ -91,77 +88,95 @@ const ContactForm = ({
         ))}
       </div>
 
-      <PhoneIcon className="col-span-2 self-start justify-self-end" />
+      <PhoneIcon className="col-span-2 mt-2 self-start justify-self-end" />
       <div className="col-span-10">
         {phoneFields.map((field, index) => (
-          <div
-            key={field.id}
-            className="mb-2 flex flex-wrap border-b pb-2 text-sm"
-          >
-            <select className="" {...register(`phones.${index}.type`)}>
-              <option value="Mobile">Mobile</option>
-              <option value="Work">Work</option>
-              <option value="Home">Home</option>
-            </select>
-            <div className="flex grow">
-              <input
-                type="tel"
-                className="focus:outline-0"
-                {...register(`phones.${index}.number`)}
-                placeholder="Phone Number"
-              />
-              {index === 0 && (
-                <button
-                  className="ms-auto hover:cursor-pointer"
-                  type="button"
-                  onClick={() => {
-                    phoneAppend({ type: "Mobile", number: "" });
-                  }}
-                >
-                  <PlusIcon />
-                </button>
+          <div key={field.id} className="mb-2 flex gap-1 pb-2 text-sm">
+            <Controller
+              name={`phones.${index}.type`}
+              control={control}
+              render={({ field }) => (
+                <Select {...field}>
+                  <SelectTrigger className="w-auto">
+                    <SelectValue placeholder="Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Mobile">Mobile</SelectItem>
+                    <SelectItem value="Home">Home</SelectItem>
+                    <SelectItem value="Work">Work</SelectItem>
+                  </SelectContent>
+                </Select>
               )}
-            </div>
+            />
+
+            <Input
+              type="tel"
+              className="grow text-sm"
+              {...register(`phones.${index}.number`)}
+              placeholder="Phone Number"
+            />
           </div>
         ))}
+
+        <Button
+          variant={"outline"}
+          className="w-full rounded-full border-blue-100 bg-blue-100 text-blue-600 hover:cursor-pointer"
+          type="button"
+          onClick={() => {
+            phoneAppend({ type: "Mobile", number: "" });
+          }}
+        >
+          <PlusIcon /> Add phone
+        </Button>
       </div>
 
-      <MailIcon className="col-span-2 self-start justify-self-end" />
+      <MailIcon className="col-span-2 mt-2 self-start justify-self-end" />
       <div className="col-span-10">
         {emailFields.map((field, index) => (
-          <div
-            key={field.id}
-            className="mb-2 flex flex-wrap border-b pb-2 text-sm"
-          >
-            <select className="" {...register(`emails.${index}.type`)}>
-              <option value="Home">Home</option>
-              <option value="Work">Work</option>
-            </select>
-            <div className="flex grow">
-              <input
-                type="email"
-                className="focus:outline-0"
-                {...register(`emails.${index}.address`)}
-                placeholder="Email Address"
-              />
-              {index === 0 && (
-                <button
-                  className="ms-auto hover:cursor-pointer"
-                  type="button"
-                  onClick={() => {
-                    emailAppend({ type: "Home", address: "" });
-                  }}
-                >
-                  <PlusIcon />
-                </button>
+          <div key={field.id} className="mb-2 flex gap-1 border-b pb-2 text-sm">
+            <Controller
+              name={`emails.${index}.type`}
+              control={control}
+              render={({ field }) => (
+                <Select {...field}>
+                  <SelectTrigger className="w-auto">
+                    <SelectValue placeholder="Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Home">Home</SelectItem>
+                    <SelectItem value="Work">Work</SelectItem>
+                  </SelectContent>
+                </Select>
               )}
-            </div>
+            />
+
+            <Input
+              type="email"
+              className="grow text-sm"
+              {...register(`emails.${index}.address`)}
+              placeholder="Email Address"
+            />
           </div>
         ))}
+        <Button
+          variant={"outline"}
+          className="w-full rounded-full border-blue-100 bg-blue-100 text-blue-600 hover:cursor-pointer"
+          type="button"
+          onClick={() => {
+            emailAppend({ type: "Home", address: "" });
+          }}
+        >
+          <PlusIcon /> Add email
+        </Button>
       </div>
 
-      <div className="col-span-12">
-        <Button type="submit">Save Contact</Button>
+      <div className="col-span-10 col-start-3">
+        <Button
+          className="w-full rounded-full bg-blue-600 hover:cursor-pointer"
+          type="submit"
+        >
+          Save
+        </Button>
       </div>
     </form>
   );
