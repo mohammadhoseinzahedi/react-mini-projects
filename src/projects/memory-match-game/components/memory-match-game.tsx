@@ -65,7 +65,7 @@ const MemoryGame = ({ images }: MemoryGameProps) => {
   };
 
   return (
-    <div className="max-w-4xl p-8 mx-auto grid grid-cols-4 gap-4">
+    <div className="max-w-2xl p-8 mx-auto grid grid-cols-4 gap-4">
       {cards.map((card, index) => (
         <img
           key={index}
