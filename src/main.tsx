@@ -8,19 +8,23 @@ import ContactsPage from "@/pages/contacts.page";
 import EditContactPage from "@/pages/edit-contact.page";
 import ContactPage from "@/pages/contact.page";
 import MemoryMatchGamePage from "@/pages/memory-match-game.page";
+import MainLayout from "@/pages/layout";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ContactContextProvider>
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
-          <Route index element={<HomePage />} />
-          <Route path="contacts">
-            <Route index element={<ContactsPage />} />
-            <Route path=":uuid" element={<ContactPage />} />
-            <Route path=":uuid/edit" element={<EditContactPage />} />
+          <Route element={<MainLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="contacts">
+              <Route index element={<ContactsPage />} />
+              <Route path=":uuid" element={<ContactPage />} />
+              <Route path=":uuid/edit" element={<EditContactPage />} />
+            </Route>
+            <Route path="/memory-match-game" element={<MemoryMatchGamePage />}
+            />
           </Route>
-          <Route path="/memory-match-game" element={<MemoryMatchGamePage />} />
         </Routes>
       </BrowserRouter>
     </ContactContextProvider>

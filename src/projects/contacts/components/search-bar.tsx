@@ -7,7 +7,7 @@ const SearchBar = ({
 }) => {
   return (
     <input
-      className="my-3 w-full rounded-2xl bg-gray-100 px-3 py-1 text-sm text-gray-900"
+      className="my-4 w-full rounded-2xl bg-gray-100 px-3 py-1 text-sm text-gray-900"
       type="search"
       onChange={onSearchBarChange}
       placeholder={`Search through all ${contactsLength} contacts`}

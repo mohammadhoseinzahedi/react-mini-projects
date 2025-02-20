@@ -9,8 +9,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router";
 import type { Project } from "@/lib/types";
+import { Settings as SettingsIcon } from "lucide-react";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
@@ -20,25 +22,26 @@ const ProjectCard = ({ project }: { project: Project }) => {
         <CardDescription>{project.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="space-y-1.5">
-          <h3>Technologies and Libraries</h3>
-          <div className="5 space-y-1.5 space-x-1.5">
-            {project.techs.map((tech, index) => {
-              const { text, bg } = TECH_COLORS[tech] || {
-                text: "text-gray-700",
-                bg: "bg-gray-100",
-              };
-              return (
-                <Badge
-                  key={index}
-                  className={`${text} ${bg}`}
-                  variant={"outline"}
-                >
-                  {tech}
-                </Badge>
-              );
-            })}
-          </div>
+        <h3 className="flex gap-2">
+          <SettingsIcon /> Tech Stack
+        </h3>
+        <Separator className="my-3" />
+        <div className="5 space-y-1.5 space-x-1.5">
+          {project.techs.map((tech, index) => {
+            const { text, bg } = TECH_COLORS[tech] || {
+              text: "text-gray-700",
+              bg: "bg-gray-100",
+            };
+            return (
+              <Badge
+                key={index}
+                className={`${text} ${bg}`}
+                variant={"outline"}
+              >
+                {tech}
+              </Badge>
+            );
+          })}
         </div>
       </CardContent>
       <CardFooter></CardFooter>
