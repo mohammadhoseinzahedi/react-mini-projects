@@ -14,6 +14,25 @@ import { Link } from "react-router";
 import type { Project } from "@/lib/types";
 import { Settings as SettingsIcon } from "lucide-react";
 
+const TechList = (props: { techs: string[] }) => {
+  return (
+    <div role="list" className="5 space-y-1.5 space-x-1.5">
+      {props.techs.map((tech, index) => {
+        const { text, bg } = TECH_COLORS[tech] || {
+          text: "text-gray-700",
+          bg: "bg-gray-100",
+        };
+        return (
+          <Badge role="listitem" key={index} className={`${text} ${bg}`} variant={"outline"}
+          >
+            {tech}
+          </Badge>
+        );
+      })}
+    </div>
+  );
+};
+
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <Card className="flex h-full flex-col hover:bg-gray-50">
@@ -26,23 +45,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
           <SettingsIcon /> Tech Stack
         </h3>
         <Separator className="my-3" />
-        <div className="5 space-y-1.5 space-x-1.5">
-          {project.techs.map((tech, index) => {
-            const { text, bg } = TECH_COLORS[tech] || {
-              text: "text-gray-700",
-              bg: "bg-gray-100",
-            };
-            return (
-              <Badge
-                key={index}
-                className={`${text} ${bg}`}
-                variant={"outline"}
-              >
-                {tech}
-              </Badge>
-            );
-          })}
-        </div>
+        <TechList techs={project.techs} />
       </CardContent>
       <CardFooter></CardFooter>
     </Card>
