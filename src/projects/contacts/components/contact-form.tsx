@@ -10,6 +10,7 @@ import {
 import { Phone as PhoneIcon } from "lucide-react";
 import { Mail as MailIcon } from "lucide-react";
 import { Plus as PlusIcon } from "lucide-react";
+import { NotepadText as NotesIcon } from "lucide-react";
 import UserImage from "@/assets/user.png";
 import { fieldToLabel } from "@/projects/contacts/lib/helpers";
 import type { Contact } from "@/projects/contacts/lib/types";
@@ -96,7 +97,10 @@ const ContactForm = ({
               name={`phones.${index}.type`}
               control={control}
               render={({ field }) => (
-                <Select {...field}>
+                <Select
+                  value={field.value}
+                  onValueChange={(value) => field.onChange(value)}
+                >
                   <SelectTrigger className="w-auto">
                     <SelectValue placeholder="Type" />
                   </SelectTrigger>
@@ -133,12 +137,15 @@ const ContactForm = ({
       <MailIcon className="col-span-2 mt-2 self-start justify-self-end" />
       <div className="col-span-10">
         {emailFields.map((field, index) => (
-          <div key={field.id} className="mb-2 flex gap-1 border-b pb-2 text-sm">
+          <div key={field.id} className="mb-2 flex gap-1 pb-2 text-sm">
             <Controller
               name={`emails.${index}.type`}
               control={control}
               render={({ field }) => (
-                <Select {...field}>
+                <Select
+                  value={field.value}
+                  onValueChange={(value) => field.onChange(value)}
+                >
                   <SelectTrigger className="w-auto">
                     <SelectValue placeholder="Type" />
                   </SelectTrigger>
@@ -170,9 +177,17 @@ const ContactForm = ({
         </Button>
       </div>
 
-      <div className="col-span-10 col-start-3">
+      <NotesIcon className="col-span-2 mt-1 self-start justify-self-end" />
+      <Input
+        type="text"
+        className="col-span-10 text-sm"
+        {...register(`notes`)}
+        placeholder="Notes"
+      />
+
+      <div className="col-span-12 justify-self-end">
         <Button
-          className="w-full rounded-full bg-blue-600 hover:cursor-pointer"
+          className="rounded-full bg-blue-600 px-6 py-3 hover:cursor-pointer"
           type="submit"
         >
           Save
