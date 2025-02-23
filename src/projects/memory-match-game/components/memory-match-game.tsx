@@ -32,7 +32,7 @@ const MemoryGame = ({ images }: MemoryGameProps) => {
           return prevCards.map((card) =>
             card.id === firstCard.id || card.id === secondCard.id
               ? { ...card, isMatched: true }
-              : card
+              : card,
           );
         });
       } else {
@@ -41,7 +41,7 @@ const MemoryGame = ({ images }: MemoryGameProps) => {
             return prevCards.map((card) =>
               card.id === firstCard.id || card.id === secondCard.id
                 ? { ...card, isFlipped: false }
-                : card
+                : card,
             );
           });
         }, 400); // Adjust the delay as per your preference
@@ -49,6 +49,18 @@ const MemoryGame = ({ images }: MemoryGameProps) => {
       setFlippedCards([]);
     }
   }, [flippedCards]);
+
+  useEffect(() => {
+    let isWinner = true;
+    cards.forEach((card) => {
+      if (!card.isMatched) {
+        isWinner = false;
+        return;
+      };
+    });
+    if (isWinner) setTimeout(() => {alert("بر طبل شادانه بکوب ...")}, 600);
+
+  }, [cards]);
 
   const handleCardClick = (card: MemoryGameCard) => {
     if (card.isFlipped || card.isMatched) {
@@ -65,7 +77,7 @@ const MemoryGame = ({ images }: MemoryGameProps) => {
   };
 
   return (
-    <div className="max-w-2xl p-8 mx-auto grid grid-cols-4 gap-4">
+    <div className="mx-auto grid max-w-2xl grid-cols-4 gap-4 p-8">
       {cards.map((card, index) => (
         <img
           key={index}
