@@ -8,6 +8,7 @@ import ContactsPage from "@/pages/contacts.page";
 import EditContactPage from "@/pages/edit-contact.page";
 import ContactPage from "@/pages/contact.page";
 import MemoryMatchGamePage from "@/pages/memory-match-game.page";
+import ResumePage from "@/pages/resume.page";
 import MainLayout from "@/pages/layout";
 
 createRoot(document.getElementById("root")!).render(
@@ -22,8 +23,8 @@ createRoot(document.getElementById("root")!).render(
               <Route path=":uuid" element={<ContactPage />} />
               <Route path=":uuid/edit" element={<EditContactPage />} />
             </Route>
-            <Route path="/memory-match-game" element={<MemoryMatchGamePage />}
-            />
+            <Route path="/memory-match-game" element={<MemoryMatchGamePage />} />
+            <Route path="/resume" element={<ResumePage />} />
           </Route>
         </Routes>
       </BrowserRouter>

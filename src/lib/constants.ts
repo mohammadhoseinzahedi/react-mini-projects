@@ -13,6 +13,17 @@ export const TECH_COLORS: { [key: string]: { text: string; bg: string } } = {
 
 export const PROJECTS: readonly Project[] = [
   {
+    title: "Terminal Resume",
+    description: "Personal resume inspired by fallout terminal",
+    // image: "https://via.placeholder.com/150",
+    href: "/resume",
+    techs: [
+      "TypeScript",
+      "React",
+      "TailwindCSS",
+    ],
+  },
+  {
     title: "Contacts",
     description: "A simple contact list",
     // image: "https://via.placeholder.com/150",

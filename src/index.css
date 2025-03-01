@@ -30,6 +30,20 @@
   --chart-4: hsl(43 74% 66%);
   --chart-5: hsl(27 87% 67%);
   --radius: 0.6rem;
+  --terminal-green: #00ff00; /* Glowing green text */
+  --terminal-black: #000000; /* Black terminal background */
+  --crt-grid: radial-gradient(
+    circle,
+    rgba(0, 255, 0, 0.1) 1px,
+    rgba(0, 0, 0, 0.1) 1px
+  ); /* CRT pixel grid effect */
+  --scanline: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 0, 0.1) 2px,
+    rgba(0, 255, 0, 0.1) 4px
+  ); /* Scanline effect */
 }
 
 .dark {
@@ -96,5 +110,153 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.terminal-wrapper {
+  background: var(--crt-grid), var(--scanline), var(--terminal-black);
+  color: var(--terminal-green);
+  font-family: var(--font-mono), monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  text-shadow: 0 0 5px #00FF00, 0 0 10px #00FF00;
+  margin: 0;
+  padding: 0 20px;
+  height: calc(100vh - 40px); /* Adjust height to account for header */
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.terminal {
+  position: relative;
+  width: 100%;
+  height: 100%; /* Take full height of wrapper */
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden; /* Hide overflow for the CRT effect */
+}
+
+/* Headings and text */
+.terminal-output h1,
+.terminal-output h2,
+.terminal-output h3,
+.terminal-output p,
+.terminal-output code {
+  text-transform: uppercase; /* Uppercase text */
+  margin: 0.5rem 0; /* Consistent spacing */
+}
+
+
+/* Default font sizes for headings */
+.terminal-output h1 {
+  font-size: 2rem; /* 32px */
+  line-height: 1.2;
+}
+
+.terminal-output h2 {
+  font-size: 1.75rem; /* 28px */
+  line-height: 1.3;
+}
+
+.terminal-output h3 {
+  font-size: 1.5rem; /* 24px */
+  line-height: 1.4;
+}
+
+/* CRT overlay effect */
+.terminal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--crt-grid), var(--scanline);
+  pointer-events: none; /* Ensure the overlay doesn't block interactions */
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Terminal output styling */
+.terminal-output {
+  white-space: pre-wrap; /* Preserve formatting and line breaks */
+}
+
+/* Links container */
+.terminal-output .links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Link styling */
+.terminal-output .link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer; /* Show pointer cursor on hover */
+}
+
+.terminal-output .link a {
+  color: var(--terminal-green);
+  text-decoration: none;
+}
+
+.terminal-output .link.selected a {
+  background: rgba(0, 255, 0, 0.1); /* Highlight selected link */
+}
+
+/* Blinking cursor */
+.terminal-output .terminal-cursor {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  background: var(--terminal-green);
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .terminal-output {
+    padding: 0 10px; /* Reduce padding on small devices */
+  }
+
+  .terminal {
+    padding: 10px; /* Reduce padding on small devices */
+  }
+
+  .terminal-output h1 {
+    font-size: 1.5rem; /* Smaller font size for headings */
+  }
+
+  .terminal-output h2 {
+    font-size: 1.2rem; /* Smaller font size for subheadings */
+  }
+
+  .terminal-output {
+    font-size: 12px; /* Smaller font size for terminal output */
+  }
+
+  .terminal-output .links {
+    gap: 0.25rem; /* Reduce gap between links */
+  }
+
+  .terminal-output .link {
+    gap: 0.25rem; /* Reduce gap between cursor and link text */
+  }
+
+  .terminal-output .terminal-cursor {
+    width: 8px; /* Smaller cursor */
+    height: 16px;
   }
 }

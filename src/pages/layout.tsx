@@ -19,7 +19,10 @@ const MainLayout = () => {
           </Link>
         </Container>
       </header>
-      <Outlet />
+      {/* Add padding-top to Outlet to account for the sticky header */}
+      <div> {/* Adjust this value based on your header's height */}
+        <Outlet />
+      </div>
     </>
   );
 };
